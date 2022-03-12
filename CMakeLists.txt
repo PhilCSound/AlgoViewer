@@ -8,7 +8,10 @@ option(USE_STATIC_STD_LIBS "Use statically linked standard/runtime libraries? Th
 set(SOURCE_FILES
 	src/main.cpp
 	src/Application.cpp
-	src/Application.hpp)
+	src/Application.hpp
+	src/State.hpp
+	src/AlgoDisplayState.hpp
+	src/AlgoDisplayState.cpp)
 
 set(SFML_STATIC_LIBRARIES FALSE)
 set(TGUI_BACKEND SFML)
