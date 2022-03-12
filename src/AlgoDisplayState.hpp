@@ -1,6 +1,7 @@
 #pragma once
 #include "State.hpp"
 #include "SFML/Graphics.hpp"
+#include "DataDeck.hpp"
 
 class AlgoDisplayState : public State
 {
@@ -16,5 +17,5 @@ public:
 	void Unpause() override;
 
 private:
-
+	DataDeck m_data;
 };
