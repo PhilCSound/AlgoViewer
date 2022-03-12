@@ -25,7 +25,7 @@ private:
 	void HandleInput();
 
 	std::vector<State*> m_stackOfStates;
-	std::vector<short> m_data;
+
 
 	sf::Clock m_clock;
 	bool m_isRunning;
