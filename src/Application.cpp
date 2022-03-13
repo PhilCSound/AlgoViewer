@@ -3,7 +3,7 @@
 Application::Application()
 {
 	m_window.create(sf::VideoMode(800, 800, 32), "Algo Viewer");
-	m_window.setFramerateLimit(30);
+	m_window.setFramerateLimit(1000);
 	m_window.setVerticalSyncEnabled(false);
 	m_isRunning = m_window.isOpen();
 	m_gui.setTarget(m_window);
