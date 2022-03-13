@@ -2,6 +2,7 @@
 #include "State.hpp"
 #include "SFML/Graphics.hpp"
 #include "DataDeck.hpp"
+#include "Algorithms.hpp"
 
 class AlgoDisplayState : public State
 {
@@ -18,4 +19,8 @@ public:
 
 private:
 	DataDeck m_data;
+	bool m_begin = false;
+	std::queue<Command*> m_commands;
+	std::queue<Command*> m_usedCommands;
+
 };
