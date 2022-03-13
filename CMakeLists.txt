@@ -13,7 +13,12 @@ set(SOURCE_FILES
 	src/AlgoDisplayState.hpp
 	src/AlgoDisplayState.cpp
 	src/DataDeck.hpp
-	src/DataDeck.cpp)
+	src/DataDeck.cpp
+	src/Command.hpp
+	src/LookCommand.hpp
+	src/EnumAnimationState.hpp
+	src/Algorithms.hpp
+	src/Algorithms.cpp)
 
 set(SFML_STATIC_LIBRARIES FALSE)
 set(TGUI_BACKEND SFML)
