@@ -33,6 +33,45 @@ void DataDeck::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(m_vertexArray, states);
 }
 
+void DataDeck::lookAtIndex(int index, bool indexI)
+{
+    m_animState = EnumAnimationState::LOOKING;
+    m_elapsedTime = sf::Time::Zero;
+    if (indexI)
+    {
+        ChangeQuadColor(m_indexI, DEF_COLOR_1, DEF_COLOR_2);
+        m_indexI = index;
+        ChangeQuadColor(m_indexI, INDEX_I_COLOR_1, INDEX_I_COLOR_2);
+    }
+    else
+    {
+        ChangeQuadColor(m_indexJ, DEF_COLOR_1, DEF_COLOR_2);
+        m_indexJ = index;
+        ChangeQuadColor(m_indexJ, INDEX_J_COLOR_1, INDEX_J_COLOR_2);
+    }
+}
+
+const bool DataDeck::isAnimating() const
+{
+    return (m_animState != EnumAnimationState::NOT_ANIM);
+}
+
+void DataDeck::update(sf::Time dt)
+{
+    m_elapsedTime += dt;
+    switch(m_animState)
+    {
+        case EnumAnimationState::LOOKING:
+            if (m_elapsedTime.asMilliseconds() > LOOK_ANIM_IN_MS)
+            {
+                StopAnim();
+                break;
+            }
+        default:
+            break;
+    }
+}
+
 void DataDeck::CreateVertexArray()
 {
     int i = 0;
@@ -45,10 +84,25 @@ void DataDeck::CreateVertexArray()
         quad[2].position = sf::Vector2f((i + 1) * PIX_SIZE, pixMax - PIX_SIZE * data);
         quad[3].position = sf::Vector2f((i + 1)* PIX_SIZE, pixMax);
         //Color
-        quad[0].color = sf::Color(102, 126, 234);
-        quad[1].color = sf::Color(118, 75, 162);
-        quad[2].color = sf::Color(118, 75, 162);
-        quad[3].color = sf::Color(102, 126, 234);
+        quad[0].color = DEF_COLOR_1;
+        quad[1].color = DEF_COLOR_2;
+        quad[2].color = DEF_COLOR_2;
+        quad[3].color = DEF_COLOR_1;
         i++;
     }
+}
+
+void DataDeck::ChangeQuadColor(int index, sf::Color color1, sf::Color color2)
+{
+    sf::Vertex* quad = &m_vertexArray[index * 4];
+    quad[0].color = color1;
+    quad[1].color = color2;
+    quad[2].color = color2;
+    quad[3].color = color1;
+}
+
+void DataDeck::StopAnim()
+{
+    m_animState = EnumAnimationState::NOT_ANIM;
+    m_elapsedTime = sf::Time::Zero;
 }
