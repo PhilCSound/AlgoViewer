@@ -16,6 +16,7 @@ set(SOURCE_FILES
 	src/DataDeck.cpp
 	src/Command.hpp
 	src/LookCommand.hpp
+	src/SwapCommand.hpp
 	src/EnumAnimationState.hpp
 	src/Algorithms.hpp
 	src/Algorithms.cpp)
