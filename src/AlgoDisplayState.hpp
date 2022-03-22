@@ -3,6 +3,8 @@
 #include "SFML/Graphics.hpp"
 #include "DataDeck.hpp"
 #include "Algorithms.hpp"
+#include <random>
+#include <chrono>
 
 class AlgoDisplayState : public State
 {
@@ -18,9 +20,21 @@ public:
 	void Unpause() override;
 
 private:
-	DataDeck m_data;
+	int m_numDataEntries = 50;
+    std::vector<short> m_shortData;
+	DataDeck m_dataDisplay;
 	bool m_begin = false;
+	//Command queues
 	std::queue<Command*> m_commands;
 	std::queue<Command*> m_usedCommands;
+	//For Randomizing data.
+	std::mt19937 m_randomGenerator;
+    std::random_device m_randomDevice;
+
+	/*
+	|	Private Functions
+	*/
+	void shuffleData();
+	void generateData();
 
 };
