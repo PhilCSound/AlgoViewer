@@ -1,8 +1,6 @@
 #pragma once
 #include <vector>
 #include <algorithm>
-#include <random>
-#include <chrono>
 #include "SFML/Graphics.hpp"
 #include "EnumAnimationState.hpp"
 
@@ -10,9 +8,7 @@ class DataDeck : public sf::Drawable
 {
 public:
     DataDeck();
-    std::vector<short> getCopyOfData();
-    void generateData();
-    void shuffleData();
+    void setData(std::vector<short> data);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void lookAtIndex(int index, bool indexI = true);
     void swap(int indexL, int indexR);
@@ -20,7 +16,6 @@ public:
     void update(sf::Time dt);
 
 private:
-    const unsigned int MAX_NUM_DATA = 100;
     const float PIX_SIZE = 8.0f;
     const float LOOK_ANIM_IN_MS = 3.0f;
     const float SWAP_ANIM_IN_MS = 6.0f;
@@ -32,12 +27,11 @@ private:
     const sf::Color INDEX_J_COLOR_2 = sf::Color(255, 154, 158);
     sf::VertexArray m_vertexArray;
     std::vector<short> m_shortData;
-    std::mt19937 m_randomGenerator;
-    std::random_device m_randomDevice;
     int m_indexI = 0;
     int m_indexJ = 0;
     int m_indexToSwapL = 0;
     int m_indexToSwapR = 0;
+    int m_pixMax = 0;
     sf::Time m_elapsedTime;
     EnumAnimationState m_animState = EnumAnimationState::NOT_ANIM;
 

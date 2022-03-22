@@ -2,29 +2,12 @@
 
 DataDeck::DataDeck()
 {
-    m_randomGenerator.seed(m_randomDevice());
     m_vertexArray.setPrimitiveType(sf::Quads);
-    m_vertexArray.resize(MAX_NUM_DATA * 4);
-    generateData();
 }
 
-std::vector<short> DataDeck::getCopyOfData()
+void DataDeck::setData(std::vector<short> data)
 {
-    return m_shortData;
-}
-
-void DataDeck::generateData()
-{
-    m_shortData.reserve(MAX_NUM_DATA);
-    m_shortData.resize(MAX_NUM_DATA);
-    for (auto i = 0; i < m_shortData.size(); i++)
-        m_shortData[i] = i;
-    CreateVertexArray();
-}
-
-void DataDeck::shuffleData()
-{
-    std::shuffle(m_shortData.begin(), m_shortData.end(), m_randomGenerator);
+    m_shortData = data;
     CreateVertexArray();
 }
 
@@ -100,11 +83,15 @@ void DataDeck::update(sf::Time dt)
 void DataDeck::CreateVertexArray()
 {
     int i = 0;
-    int pixMax = MAX_NUM_DATA * PIX_SIZE;
+    m_vertexArray.resize(m_shortData.size() * 4);
+    //Max element returns an iterator, so we dereference it.
+    int maxVal = *std::max_element(m_shortData.begin(), m_shortData.end());
+    m_pixMax = m_shortData.size() * PIX_SIZE;
 
+    //TODO: This is 2N~ can speed up though by implenting maxval in the loop
     for (short& data : m_shortData)
     {
-        sf::Vector2f botLeftPos = sf::Vector2f(i * PIX_SIZE, pixMax);
+        sf::Vector2f botLeftPos = sf::Vector2f(i * PIX_SIZE, m_pixMax);
         ChangeQuadPos(i, botLeftPos, data);
         ChangeQuadColor(i, DEF_COLOR_1, DEF_COLOR_2);
         i++;
@@ -139,10 +126,9 @@ void DataDeck::StopAnim()
 //Theta is a value between 0.0f and 1.0f that indicates when fully swapped
 void DataDeck::AnimQuadSwap(int index1, int index2, float theta)
 {
-    int pixMax = MAX_NUM_DATA * PIX_SIZE;
     //Quad1's default botLeft position (at theta = 0.0f) followed by Quad 2
-    sf::Vector2f quad1InitPos = sf::Vector2f(index1 * PIX_SIZE, pixMax);
-    sf::Vector2f quad2InitPos = sf::Vector2f(index2 * PIX_SIZE, pixMax);
+    sf::Vector2f quad1InitPos = sf::Vector2f(index1 * PIX_SIZE, m_pixMax);
+    sf::Vector2f quad2InitPos = sf::Vector2f(index2 * PIX_SIZE, m_pixMax);
 
     sf::Vector2f quadOffset = (quad2InitPos - quad2InitPos) * theta;
     ChangeQuadPos(index1, quad1InitPos + quadOffset, m_shortData[index1]);
@@ -151,10 +137,9 @@ void DataDeck::AnimQuadSwap(int index1, int index2, float theta)
 
 void DataDeck::SwapIndexes(int index1, int index2)
 {
-    int pixMax = MAX_NUM_DATA * PIX_SIZE;
     std::swap(m_shortData.at(index1), m_shortData.at(index2));
-    sf::Vector2f quad1InitPos = sf::Vector2f(index1 * PIX_SIZE, pixMax);
-    sf::Vector2f quad2InitPos = sf::Vector2f(index2 * PIX_SIZE, pixMax);
+    sf::Vector2f quad1InitPos = sf::Vector2f(index1 * PIX_SIZE, m_pixMax);
+    sf::Vector2f quad2InitPos = sf::Vector2f(index2 * PIX_SIZE, m_pixMax);
     ChangeQuadPos(index1, quad1InitPos, m_shortData.at(index1));
     ChangeQuadPos(index2, quad2InitPos, m_shortData.at(index2));
 }
