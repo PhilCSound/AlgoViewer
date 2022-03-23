@@ -7,7 +7,7 @@ public:
     SwapCommand(int indexLeft, int indexRight) 
         { m_indexL = indexLeft; m_indexR = indexRight; }
     
-    void execute(DataDeck& data) override
+    void execute(AlgoVisualizer& data) override
     {
         data.swap(m_indexL, m_indexR);
     }

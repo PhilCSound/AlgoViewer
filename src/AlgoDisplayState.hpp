@@ -1,7 +1,7 @@
 #pragma once
 #include "State.hpp"
 #include "SFML/Graphics.hpp"
-#include "DataDeck.hpp"
+#include "AlgoVisualizer.hpp"
 #include "Algorithms.hpp"
 #include <random>
 #include <chrono>
@@ -22,7 +22,7 @@ public:
 private:
 	int m_numDataEntries = 50;
     std::vector<short> m_shortData;
-	DataDeck m_dataDisplay;
+	AlgoVisualizer m_dataDisplay;
 	bool m_begin = false;
 	//Command queues
 	std::queue<Command*> m_commands;

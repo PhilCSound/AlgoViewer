@@ -7,7 +7,7 @@ public:
     LookCommand(int index, bool isIndexI = true) 
         { m_index = index; m_isIndexI = isIndexI; }
     
-    void execute(DataDeck& data) override
+    void execute(AlgoVisualizer& data) override
     {
         data.lookAtIndex(m_index, m_isIndexI);
     }

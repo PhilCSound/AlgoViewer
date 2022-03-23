@@ -12,8 +12,8 @@ set(SOURCE_FILES
 	src/State.hpp
 	src/AlgoDisplayState.hpp
 	src/AlgoDisplayState.cpp
-	src/DataDeck.hpp
-	src/DataDeck.cpp
+	src/AlgoVisualizer.hpp
+	src/AlgoVisualizer.cpp
 	src/Command.hpp
 	src/LookCommand.hpp
 	src/SwapCommand.hpp

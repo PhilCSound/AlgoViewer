@@ -1,8 +1,8 @@
 #pragma once
-#include "DataDeck.hpp"
+#include "AlgoVisualizer.hpp"
 
 class Command
 {
 public:
-    virtual void execute(DataDeck& data) = 0;
+    virtual void execute(AlgoVisualizer& data) = 0;
 };
