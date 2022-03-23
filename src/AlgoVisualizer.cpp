@@ -1,22 +1,22 @@
-#include "DataDeck.hpp"
+#include "AlgoVisualizer.hpp"
 
-DataDeck::DataDeck()
+AlgoVisualizer::AlgoVisualizer()
 {
     m_vertexArray.setPrimitiveType(sf::Quads);
 }
 
-void DataDeck::setData(std::vector<short> data)
+void AlgoVisualizer::setData(std::vector<short> data)
 {
     m_shortData = data;
     CreateVertexArray();
 }
 
-void DataDeck::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void AlgoVisualizer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(m_vertexArray, states);
 }
 
-void DataDeck::lookAtIndex(int index, bool indexI)
+void AlgoVisualizer::lookAtIndex(int index, bool indexI)
 {
     m_animState = EnumAnimationState::LOOKING;
     m_elapsedTime = sf::Time::Zero;
@@ -34,7 +34,7 @@ void DataDeck::lookAtIndex(int index, bool indexI)
     }
 }
 
-void DataDeck::swap(int indexL, int indexR)
+void AlgoVisualizer::swap(int indexL, int indexR)
 {
     m_animState = EnumAnimationState::SWAPPING;
     m_elapsedTime = sf::Time::Zero;
@@ -43,12 +43,12 @@ void DataDeck::swap(int indexL, int indexR)
 }
 
 
-const bool DataDeck::isAnimating() const
+const bool AlgoVisualizer::isAnimating() const
 {
     return (m_animState != EnumAnimationState::NOT_ANIM);
 }
 
-void DataDeck::update(sf::Time dt)
+void AlgoVisualizer::update(sf::Time dt)
 {
     m_elapsedTime += dt;
     float theta = m_elapsedTime.asMilliseconds() / SWAP_ANIM_IN_MS;
@@ -80,7 +80,7 @@ void DataDeck::update(sf::Time dt)
     }
 }
 
-void DataDeck::CreateVertexArray()
+void AlgoVisualizer::CreateVertexArray()
 {
     int i = 0;
     m_vertexArray.resize(m_shortData.size() * 4);
@@ -98,7 +98,7 @@ void DataDeck::CreateVertexArray()
     }
 }
 
-void DataDeck::ChangeQuadPos(int index, sf::Vector2f botLeftPos, short data)
+void AlgoVisualizer::ChangeQuadPos(int index, sf::Vector2f botLeftPos, short data)
 {
     sf::Vertex* quad = &m_vertexArray[index * 4];
     float dataHeight = PIX_SIZE * data;
@@ -108,7 +108,7 @@ void DataDeck::ChangeQuadPos(int index, sf::Vector2f botLeftPos, short data)
     quad[3].position = sf::Vector2f(botLeftPos.x + PIX_SIZE, botLeftPos.y);
 }
 
-void DataDeck::ChangeQuadColor(int index, sf::Color color1, sf::Color color2)
+void AlgoVisualizer::ChangeQuadColor(int index, sf::Color color1, sf::Color color2)
 {
     sf::Vertex* quad = &m_vertexArray[index * 4];
     quad[0].color = color1;
@@ -117,14 +117,14 @@ void DataDeck::ChangeQuadColor(int index, sf::Color color1, sf::Color color2)
     quad[3].color = color1;
 }
 
-void DataDeck::StopAnim()
+void AlgoVisualizer::StopAnim()
 {
     m_animState = EnumAnimationState::NOT_ANIM;
     m_elapsedTime = sf::Time::Zero;
 }
 
 //Theta is a value between 0.0f and 1.0f that indicates when fully swapped
-void DataDeck::AnimQuadSwap(int index1, int index2, float theta)
+void AlgoVisualizer::AnimQuadSwap(int index1, int index2, float theta)
 {
     //Quad1's default botLeft position (at theta = 0.0f) followed by Quad 2
     sf::Vector2f quad1InitPos = sf::Vector2f(index1 * PIX_SIZE, m_pixMax);
@@ -135,7 +135,7 @@ void DataDeck::AnimQuadSwap(int index1, int index2, float theta)
     ChangeQuadPos(index2, quad2InitPos - quadOffset, m_shortData[index2]);
 }
 
-void DataDeck::SwapIndexes(int index1, int index2)
+void AlgoVisualizer::SwapIndexes(int index1, int index2)
 {
     std::swap(m_shortData.at(index1), m_shortData.at(index2));
     sf::Vector2f quad1InitPos = sf::Vector2f(index1 * PIX_SIZE, m_pixMax);

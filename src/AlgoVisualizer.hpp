@@ -4,10 +4,10 @@
 #include "SFML/Graphics.hpp"
 #include "EnumAnimationState.hpp"
 
-class DataDeck : public sf::Drawable
+class AlgoVisualizer : public sf::Drawable
 {
 public:
-    DataDeck();
+    AlgoVisualizer();
     void setData(std::vector<short> data);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void lookAtIndex(int index, bool indexI = true);
