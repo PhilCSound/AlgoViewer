@@ -23,6 +23,7 @@ set(SOURCE_FILES
 
 set(SFML_STATIC_LIBRARIES FALSE)
 set(TGUI_BACKEND SFML)
+set(TGUI_STATIC_LIBRARIES FALSE)
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 
@@ -30,12 +31,12 @@ target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 
 if(USE_STATIC_LIBS)
 	set(SFML_STATIC_LIBRARIES TRUE)
-	set(TGUI_SHARED_LIBS TRUE)
+	set(TGUI_STATIC_LIBRARIES TRUE)
 endif()
 
 find_package(SFML COMPONENTS graphics audio REQUIRED)
 find_package(TGUI REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE tgui sfml-graphics sfml-audio)
+target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-audio tgui)
 
 
 if(USE_STATIC_STD_LIBS)
