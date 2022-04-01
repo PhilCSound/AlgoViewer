@@ -7,7 +7,7 @@ class State {
 
 public:
 	virtual void OnEntry(Application* app) = 0;
-	virtual void OnExit() = 0;
+	virtual void OnExit(Application* app) = 0;
 
 	virtual void Draw(sf::RenderWindow& window) = 0;
 	virtual void Update(Application* app, sf::Time elapTime) = 0;
