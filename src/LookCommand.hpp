@@ -4,8 +4,8 @@
 class LookCommand : public Command
 {
 public:
-    LookCommand(int index, bool isIndexI = true) 
-        { m_index = index; m_isIndexI = isIndexI; }
+    LookCommand(int index, bool isIndexI = true, std::string log = "") 
+        { m_index = index; m_isIndexI = isIndexI; m_log = log; }
     
     void execute(AlgoVisualizer& data) override
     {

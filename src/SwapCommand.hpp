@@ -4,8 +4,8 @@
 class SwapCommand : public Command
 {
 public:
-    SwapCommand(int indexLeft, int indexRight) 
-        { m_indexL = indexLeft; m_indexR = indexRight; }
+    SwapCommand(int indexLeft, int indexRight, std::string log = "") 
+        { m_indexL = indexLeft; m_indexR = indexRight; m_log = log; }
     
     void execute(AlgoVisualizer& data) override
     {
