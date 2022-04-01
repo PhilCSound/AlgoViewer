@@ -2,9 +2,9 @@
 #include "LookCommand.hpp"
 #include "SwapCommand.hpp"
 #include <algorithm>
-#include <queue>
+#include <deque>
 
 namespace Algo
 {
-    std::queue<Command*> SelectionSort(std::vector<short> data);
+    std::deque<Command*> SelectionSort(std::vector<short> data);
 }
