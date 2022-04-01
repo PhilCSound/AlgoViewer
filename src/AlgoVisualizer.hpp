@@ -9,11 +9,13 @@ class AlgoVisualizer : public sf::Drawable
 public:
     AlgoVisualizer();
     void setData(std::vector<short> data);
+    sf::View getView();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void lookAtIndex(int index, bool indexI = true);
     void swap(int indexL, int indexR);
     const bool isAnimating() const;
     void update(sf::Time dt);
+    void resetIndexes();
 
 private:
     const float PIX_SIZE = 8.0f;
@@ -31,7 +33,7 @@ private:
     int m_indexJ = 0;
     int m_indexToSwapL = 0;
     int m_indexToSwapR = 0;
-    int m_pixMax = 0;
+    sf::Vector2f m_pixMax;
     sf::Time m_elapsedTime;
     EnumAnimationState m_animState = EnumAnimationState::NOT_ANIM;
 

@@ -11,6 +11,11 @@ void AlgoVisualizer::setData(std::vector<short> data)
     CreateVertexArray();
 }
 
+sf::View AlgoVisualizer::getView()
+{
+    return sf::View(sf::FloatRect(0, -m_pixMax.y, m_pixMax.x, m_pixMax.y));
+}
+
 void AlgoVisualizer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(m_vertexArray, states);
@@ -82,20 +87,21 @@ void AlgoVisualizer::update(sf::Time dt)
 
 void AlgoVisualizer::CreateVertexArray()
 {
-    int i = 0;
     m_vertexArray.resize(m_shortData.size() * 4);
     //Max element returns an iterator, so we dereference it.
-    int maxVal = *std::max_element(m_shortData.begin(), m_shortData.end());
-    m_pixMax = m_shortData.size() * PIX_SIZE;
-
-    //TODO: This is 2N~ can speed up though by implenting maxval in the loop
+    int maxVal = 0;
+    int i = 0;
     for (short& data : m_shortData)
     {
-        sf::Vector2f botLeftPos = sf::Vector2f(i * PIX_SIZE, m_pixMax);
+        if (data > maxVal)
+            maxVal = data;
+        sf::Vector2f botLeftPos = sf::Vector2f(i * PIX_SIZE, 0);
         ChangeQuadPos(i, botLeftPos, data);
         ChangeQuadColor(i, DEF_COLOR_1, DEF_COLOR_2);
         i++;
     }
+    m_pixMax = sf::Vector2f( m_shortData.size() * PIX_SIZE, maxVal * PIX_SIZE);
+
 }
 
 void AlgoVisualizer::ChangeQuadPos(int index, sf::Vector2f botLeftPos, short data)
@@ -127,8 +133,8 @@ void AlgoVisualizer::StopAnim()
 void AlgoVisualizer::AnimQuadSwap(int index1, int index2, float theta)
 {
     //Quad1's default botLeft position (at theta = 0.0f) followed by Quad 2
-    sf::Vector2f quad1InitPos = sf::Vector2f(index1 * PIX_SIZE, m_pixMax);
-    sf::Vector2f quad2InitPos = sf::Vector2f(index2 * PIX_SIZE, m_pixMax);
+    sf::Vector2f quad1InitPos = sf::Vector2f(index1 * PIX_SIZE, 0);
+    sf::Vector2f quad2InitPos = sf::Vector2f(index2 * PIX_SIZE, 0);
 
     sf::Vector2f quadOffset = (quad2InitPos - quad2InitPos) * theta;
     ChangeQuadPos(index1, quad1InitPos + quadOffset, m_shortData[index1]);
@@ -138,8 +144,16 @@ void AlgoVisualizer::AnimQuadSwap(int index1, int index2, float theta)
 void AlgoVisualizer::SwapIndexes(int index1, int index2)
 {
     std::swap(m_shortData.at(index1), m_shortData.at(index2));
-    sf::Vector2f quad1InitPos = sf::Vector2f(index1 * PIX_SIZE, m_pixMax);
-    sf::Vector2f quad2InitPos = sf::Vector2f(index2 * PIX_SIZE, m_pixMax);
+    sf::Vector2f quad1InitPos = sf::Vector2f(index1 * PIX_SIZE, 0);
+    sf::Vector2f quad2InitPos = sf::Vector2f(index2 * PIX_SIZE, 0);
     ChangeQuadPos(index1, quad1InitPos, m_shortData.at(index1));
     ChangeQuadPos(index2, quad2InitPos, m_shortData.at(index2));
+}
+
+void AlgoVisualizer::resetIndexes()
+{
+    m_indexI = 0;
+    m_indexJ = 0;
+    m_indexToSwapL = 0;
+    m_indexToSwapR = 0;
 }
