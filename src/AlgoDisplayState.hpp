@@ -1,16 +1,17 @@
 #pragma once
 #include "State.hpp"
 #include "SFML/Graphics.hpp"
+#include "TGUI/TGUI.hpp"
 #include "AlgoVisualizer.hpp"
 #include "Algorithms.hpp"
 #include <random>
-#include <chrono>
+#include <algorithm>
 
 class AlgoDisplayState : public State
 {
 public:
 	void OnEntry(Application * app) override;
-	void OnExit() override;
+	void OnExit(Application* app) override;
 
 	void Draw(sf::RenderWindow & window) override;
 	void Update(Application * app, sf::Time elapTime) override;
@@ -24,17 +25,26 @@ private:
     std::vector<short> m_shortData;
 	AlgoVisualizer m_dataDisplay;
 	bool m_begin = false;
+	sf::View m_displayView;
+	//TGUI
+	tgui::GuiSFML m_tgui;
 	//Command queues
-	std::queue<Command*> m_commands;
-	std::queue<Command*> m_usedCommands;
+	std::deque<Command*> m_commands;
+	std::deque<Command*> m_usedCommands;
 	//For Randomizing data.
 	std::mt19937 m_randomGenerator;
-    std::random_device m_randomDevice;
-
+	tgui::String m_selectedAlgo = "";
 	/*
 	|	Private Functions
 	*/
 	void shuffleData();
-	void generateData();
-
+	void generateLinearData();
+	void generateRandomData();
+	void resizeData();
+	void createUI();
+	void updateDisplayView();
+	void beginAlgorithm(bool replay = false);
+	void doneWithAlgorithm();
+	void getAlgorithm();
+	void log(const std::string string);
 };
