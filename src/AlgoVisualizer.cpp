@@ -136,7 +136,7 @@ void AlgoVisualizer::AnimQuadSwap(int index1, int index2, float theta)
     sf::Vector2f quad1InitPos = sf::Vector2f(index1 * PIX_SIZE, 0);
     sf::Vector2f quad2InitPos = sf::Vector2f(index2 * PIX_SIZE, 0);
 
-    sf::Vector2f quadOffset = (quad2InitPos - quad2InitPos) * theta;
+    sf::Vector2f quadOffset = (quad2InitPos - quad1InitPos) * theta;
     ChangeQuadPos(index1, quad1InitPos + quadOffset, m_shortData[index1]);
     ChangeQuadPos(index2, quad2InitPos - quadOffset, m_shortData[index2]);
 }
