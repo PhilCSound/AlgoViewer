@@ -62,11 +62,9 @@ void AlgoVisualizer::update(sf::Time dt)
     {
         case EnumAnimationState::LOOKING:
             if (m_elapsedTime.asMilliseconds() > LOOK_ANIM_IN_MS)
-            {
                 StopAnim();
-                break;
-            }
             break;
+
         case EnumAnimationState::SWAPPING:
 
             if (theta >= 1.0f)
@@ -75,7 +73,6 @@ void AlgoVisualizer::update(sf::Time dt)
                 AnimQuadSwap(m_indexToSwapL, m_indexToSwapR, theta);
                 SwapIndexes(m_indexToSwapL, m_indexToSwapR);
                 StopAnim();
-                return;
             }
             else
                 AnimQuadSwap(m_indexToSwapL, m_indexToSwapR, theta);
@@ -88,7 +85,6 @@ void AlgoVisualizer::update(sf::Time dt)
 void AlgoVisualizer::CreateVertexArray()
 {
     m_vertexArray.resize(m_shortData.size() * 4);
-    //Max element returns an iterator, so we dereference it.
     int maxVal = 0;
     int i = 0;
     for (short& data : m_shortData)
