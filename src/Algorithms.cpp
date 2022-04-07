@@ -18,6 +18,8 @@ namespace Algo
                 if (data[j] < data[smallestIndex])
                     smallestIndex = j;
             }
+            if (i == smallestIndex)
+                continue;
             std::swap(data.at(i), data.at(smallestIndex));
             if (commands)
                 q.push_back(new SwapCommand(i, smallestIndex));
