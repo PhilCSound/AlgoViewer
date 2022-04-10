@@ -4,6 +4,7 @@
 #include "TGUI/TGUI.hpp"
 #include "AlgoVisualizer.hpp"
 #include "Algorithms.hpp"
+#include "SortAlgoEnum.hpp"
 #include <random>
 #include <algorithm>
 
@@ -33,7 +34,8 @@ private:
 	std::deque<Command*> m_usedCommands;
 	//For Randomizing data.
 	std::mt19937 m_randomGenerator;
-	tgui::String m_selectedAlgo = "";
+	sf::String m_algoName = "Selection Sort";
+	SortAlgoEnum m_selectedAlgo = SortAlgoEnum::SelectionSort;
 	/*
 	|	Private Functions
 	*/
@@ -46,5 +48,6 @@ private:
 	void beginAlgorithm(bool replay = false);
 	void doneWithAlgorithm();
 	void getAlgorithm();
+	void setAlgorithm(bool time);
 	void log(const std::string string);
 };

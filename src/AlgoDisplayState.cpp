@@ -154,7 +154,8 @@ void AlgoDisplayState::createUI()
 
         sortBox->addItem("Selection Sort");
         sortBox->setSelectedItemByIndex(0);
-        m_selectedAlgo = sortBox->getSelectedItem();
+        m_algoName = sortBox->getSelectedItem().toStdString();
+        m_selectedAlgo = SortAlgoEnum::SelectionSort;
         sortBox->addItem("Insertion Sort");
         sortBox->addItem("Merge Sort");
         sortBox->addItem("Radix Sort");
@@ -178,7 +179,18 @@ void AlgoDisplayState::beginAlgorithm(bool replay)
         updateDisplayView();
     }
     else
-        m_commands = Algo::SelectionSort(m_shortData);
+    {
+        tgui::ComboBox::Ptr sortBox = m_tgui.get<tgui::ComboBox>("Sort");
+        if (!sortBox)
+            return;
+        m_algoName = sortBox->getSelectedItem().toStdString();
+        m_selectedAlgo = (SortAlgoEnum) sortBox->getSelectedItemIndex();
+        sf::Clock clock;
+        setAlgorithm(false);
+        log(m_algoName + " completed in: " + 
+            std::to_string((int)clock.getElapsedTime().asMicroseconds()) + " microseconds.");
+        setAlgorithm(true);
+    }
 
     m_usedCommands.clear();
     
@@ -192,8 +204,28 @@ void AlgoDisplayState::beginAlgorithm(bool replay)
         progressBar->setValue(0);
         progressBar->setMaximum(m_commands.size());
     }
-    
 }
+
+void AlgoDisplayState::setAlgorithm(bool time)
+{
+    switch (m_selectedAlgo)
+    {
+        default:
+            m_commands = Algo::SelectionSort(m_shortData, time);
+            break;
+        case SortAlgoEnum::SelectionSort:
+            m_commands = Algo::SelectionSort(m_shortData, time);
+            break;
+        case SortAlgoEnum::InsertionSort:
+            m_commands = Algo::InsertionSort(m_shortData, time);
+            break;
+        case SortAlgoEnum::MergeSort:
+            break;
+        case SortAlgoEnum::RadixSort:
+            break;
+    }
+}
+
 
 void AlgoDisplayState::doneWithAlgorithm()
 {
