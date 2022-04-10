@@ -20,7 +20,9 @@ public:
 private:
     const float PIX_SIZE = 8.0f;
     const float LOOK_ANIM_IN_MS = 3.0f;
-    const float SWAP_ANIM_IN_MS = 560.0f;
+    const float BASE_SWAP_ANIM_IN_MS = 0.0f;
+    const float DIFFERENCE_SWAP = 10.0f;
+    float SWAP_TIME_ADD = 0.0f;
     const sf::Color DEF_COLOR_1 = sf::Color(102, 126, 234);
     const sf::Color DEF_COLOR_2 = sf::Color(118, 75, 162);
     const sf::Color INDEX_I_COLOR_1 = sf::Color(19, 84, 122);

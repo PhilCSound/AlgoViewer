@@ -43,6 +43,7 @@ void AlgoVisualizer::swap(int indexL, int indexR)
 {
     m_animState = EnumAnimationState::SWAPPING;
     m_elapsedTime = sf::Time::Zero;
+    SWAP_TIME_ADD = (indexR - indexL) * DIFFERENCE_SWAP;
     m_indexToSwapL = indexL;
     m_indexToSwapR = indexR;
 }
@@ -56,7 +57,7 @@ const bool AlgoVisualizer::isAnimating() const
 void AlgoVisualizer::update(sf::Time dt)
 {
     m_elapsedTime += dt;
-    float theta = m_elapsedTime.asMilliseconds() / SWAP_ANIM_IN_MS;
+    float theta = m_elapsedTime.asMilliseconds() / (BASE_SWAP_ANIM_IN_MS + SWAP_TIME_ADD);
     theta = theta;
     switch(m_animState)
     {
