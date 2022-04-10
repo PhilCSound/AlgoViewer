@@ -19,7 +19,8 @@ set(SOURCE_FILES
 	src/SwapCommand.hpp
 	src/EnumAnimationState.hpp
 	src/Algorithms.hpp
-	src/Algorithms.cpp)
+	src/Algorithms.cpp
+	src/SortAlgoEnum.hpp)
 
 set(SFML_STATIC_LIBRARIES FALSE)
 set(TGUI_BACKEND SFML)
