@@ -147,7 +147,7 @@ Panel.BeginPanel {
         Position = (5%, 85%);
         Size = (90%, 10%);
         Step = 1;
-        Value = 10;
+        Value = 50;
 
         Renderer {
             BorderColor = #3C3C3C;
