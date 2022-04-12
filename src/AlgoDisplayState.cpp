@@ -104,6 +104,11 @@ void AlgoDisplayState::resizeData()
     
     unsigned int size = static_cast<unsigned int>(slider->getValue());
     unsigned int oldSize = m_shortData.size();
+
+    tgui::Label::Ptr lbl = m_tgui.get<tgui::Label>("Num");
+    if (lbl)
+        lbl->setText(std::to_string(size));
+
     m_shortData.reserve(size);
     m_shortData.resize(size);
     if (size > oldSize)
