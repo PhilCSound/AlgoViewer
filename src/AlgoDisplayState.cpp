@@ -228,6 +228,7 @@ void AlgoDisplayState::setAlgorithm(bool time)
             m_commands = Algo::InsertionSort(m_shortData, time);
             break;
         case SortAlgoEnum::MergeSort:
+            m_commands = Algo::MergeSort(m_shortData, time);
             break;
         case SortAlgoEnum::RadixSort:
             break;
