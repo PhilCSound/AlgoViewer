@@ -75,12 +75,14 @@ void AlgoDisplayState::Unpause()
 
 void AlgoDisplayState::shuffleData()
 {
+    m_usedCommands.clear(); //Fixes a bug where replay messes up
     std::shuffle(m_shortData.begin(), m_shortData.end(), m_randomGenerator);
     updateDisplayView();
 }
 
 void AlgoDisplayState::generateLinearData()
 {
+    m_usedCommands.clear(); //Fixes a bug where replay messes up
     for (auto i = 0; i < m_shortData.size(); i++)
         m_shortData[i] = i + 1;
     updateDisplayView();
@@ -88,6 +90,7 @@ void AlgoDisplayState::generateLinearData()
 
 void AlgoDisplayState::generateRandomData()
 {
+    m_usedCommands.clear(); //Fixes a bug where replay messes up
     std::uniform_int_distribution dist { 1, m_numDataEntries + 1 };
     for (auto i = 0; i < m_shortData.size(); i++)
         m_shortData[i] = dist(m_randomGenerator);
