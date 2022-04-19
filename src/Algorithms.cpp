@@ -2,6 +2,43 @@
 
 namespace Algo
 {
+    //Private namespace functions
+    //Empty namespace can only be accessed from this file. "Algorithms.cpp"
+    namespace
+    {
+        std::deque<Command*> MergeSorts(std::vector<short>& data, int lowPoint, 
+            int highPoint, bool commands)
+            {
+                std::deque<Command*> q;
+                std::deque<Command*> newCommands;
+                if (lowPoint < highPoint)
+                {
+                    int midPoint = (lowPoint + highPoint) * 0.5f;
+                    newCommands = MergeSorts(data, lowPoint, midPoint, commands);
+                    if (commands)
+                        q.insert(q.end(), newCommands.begin(), newCommands.end());
+                    newCommands.clear();
+                    newCommands = MergeSorts(data, midPoint + 1, highPoint, commands);
+                    if (commands)
+                        q.insert(q.end(), newCommands.begin(), newCommands.end());
+
+                    //Definately a hack for now.
+                    std::sort(data.begin() + lowPoint, data.begin() + midPoint +1);
+                    std::sort(data.begin() + midPoint + 1, data.begin() + highPoint +1);
+                    std::vector<short> mergedData;
+                    std::merge(data.begin() + lowPoint, data.begin() + midPoint+1, 
+                        data.begin() + midPoint + 1, data.begin() + highPoint +1, std::back_inserter(mergedData));
+                    if (!commands)
+                        return q;
+                    std::copy(mergedData.begin(), mergedData.end(), data.begin() + lowPoint);
+                    q.push_back(new SetGroupCommand(lowPoint, highPoint, mergedData));
+                }
+                return q;
+            }
+    }
+
+
+
     std::deque<Command *> SelectionSort(std::vector<short> data, bool commands)
     {
         std::deque<Command *> q;
@@ -53,4 +90,12 @@ namespace Algo
         }
         return q;
     }
+
+    std::deque<Command*> MergeSort(std::vector<short> data, bool commands)
+    {
+        std::deque<Command *> q;
+        q = MergeSorts(data, 0, data.size() - 1, commands);
+        return q;
+    }
+
 }
