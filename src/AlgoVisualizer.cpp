@@ -48,6 +48,26 @@ void AlgoVisualizer::swap(int indexL, int indexR)
     m_indexToSwapR = indexR;
 }
 
+void AlgoVisualizer::lookSetGroup(int indexL, int indexR, std::vector<short> data)
+{
+    m_animState = EnumAnimationState::SETGROUP;
+    m_elapsedTime = sf::Time::Zero;
+    m_copydata = data;
+    m_indexToSwapL = indexL;
+    m_indexToSwapR = indexR;
+    m_indexI = indexL;
+    m_indexJ = indexR;
+}
+
+void AlgoVisualizer::setGroup()
+{
+    std::copy(m_copydata.begin(), m_copydata.end(), m_shortData.begin() + m_indexI);
+    CreateVertexArray();
+    resetIndexes();
+    m_copydata.clear();
+    m_animState = EnumAnimationState::NOT_ANIM;
+}
+
 
 const bool AlgoVisualizer::isAnimating() const
 {
@@ -78,6 +98,22 @@ void AlgoVisualizer::update(sf::Time dt)
             else
                 AnimQuadSwap(m_indexToSwapL, m_indexToSwapR, theta);
             return;
+        case EnumAnimationState::SETGROUP:
+            if (m_elapsedTime.asMilliseconds() > LOOK_ANIM_IN_MS * 40)
+            {
+                if (m_indexToSwapL >= m_indexToSwapR)
+                {
+                    setGroup();
+                    return;
+                }
+                ChangeQuadColor(m_indexToSwapL, sf::Color(220, 28, 19), 
+                    sf::Color(240, 116, 112));
+                ChangeQuadColor(m_indexToSwapR, sf::Color(220, 28, 19), 
+                    sf::Color(240, 116, 112));
+                m_indexToSwapL++;
+                m_indexToSwapR--;
+            }
+            break;
         default:
             break;
     }

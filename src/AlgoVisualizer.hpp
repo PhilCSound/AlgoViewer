@@ -13,6 +13,8 @@ public:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void lookAtIndex(int index, bool indexI = true);
     void swap(int indexL, int indexR);
+    void lookSetGroup(int indexL, int indexR, std::vector<short> data);
+    void setGroup();
     const bool isAnimating() const;
     void update(sf::Time dt);
     void resetIndexes();
@@ -31,6 +33,7 @@ private:
     const sf::Color INDEX_J_COLOR_2 = sf::Color(255, 154, 158);
     sf::VertexArray m_vertexArray;
     std::vector<short> m_shortData;
+    std::vector<short> m_copydata;
     int m_indexI = 0;
     int m_indexJ = 0;
     int m_indexToSwapL = 0;
