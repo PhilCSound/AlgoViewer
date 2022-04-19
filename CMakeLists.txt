@@ -17,6 +17,7 @@ set(SOURCE_FILES
 	src/Command.hpp
 	src/LookCommand.hpp
 	src/SwapCommand.hpp
+	src/SetGroupCommand.hpp
 	src/EnumAnimationState.hpp
 	src/Algorithms.hpp
 	src/Algorithms.cpp

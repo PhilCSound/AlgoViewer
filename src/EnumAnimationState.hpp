@@ -1,4 +1,4 @@
 enum EnumAnimationState
 {   
-    NOT_ANIM, LOOKING, SWAPPING
+    NOT_ANIM, LOOKING, SWAPPING, SETGROUP
 };
