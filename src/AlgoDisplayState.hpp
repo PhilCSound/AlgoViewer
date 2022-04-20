@@ -6,6 +6,7 @@
 #include "Algorithms.hpp"
 #include "SortAlgoEnum.hpp"
 #include <random>
+#include <limits>
 #include <algorithm>
 
 class AlgoDisplayState : public State

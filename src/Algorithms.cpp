@@ -35,6 +35,19 @@ namespace Algo
                 }
                 return q;
             }
+        
+        int RadixGetLength(int value) 
+        {
+            if (value == 0)
+                return 1;
+            int digits = 0;
+            while (value != 0) 
+            {
+                digits = digits + 1;
+                value = value / 10;
+            }
+            return digits;
+        }
     }
 
 
@@ -95,6 +108,36 @@ namespace Algo
     {
         std::deque<Command *> q;
         q = MergeSorts(data, 0, data.size() - 1, commands);
+        return q;
+    }
+
+    std::deque<Command*> RadixSort(std::vector<short> data, bool commands)
+    {
+        std::deque<Command *> q;
+        std::vector<std::vector<short>> buckets(10);
+        int maxNum = *std::max_element(data.begin(), data.end());
+        int maxDigits = RadixGetLength(maxNum);
+
+
+        int pow10 = 1;
+        for (int digitIndex = 0; digitIndex < maxDigits; digitIndex++) 
+        {
+            for (auto& i : data) 
+            {
+                int bucketIndex = abs(i / pow10) % 10;
+                buckets.at(bucketIndex).push_back(i);
+            }
+            int arrayIndex = 0;
+            data.clear();
+            for (auto& b : buckets)
+                for (auto& shorts : b)
+                    data.push_back(shorts);
+            if (commands)
+                q.push_back(new SetGroupCommand(0, data.size()-1, data));
+            pow10 *= 10;
+            for (auto& b : buckets)
+                b.clear();
+         }
         return q;
     }
 

@@ -91,7 +91,7 @@ void AlgoDisplayState::generateLinearData()
 void AlgoDisplayState::generateRandomData()
 {
     m_usedCommands.clear(); //Fixes a bug where replay messes up
-    std::uniform_int_distribution dist { 1, m_numDataEntries + 1 };
+    std::uniform_int_distribution dist { 1, (int)std::numeric_limits<short>::max() };
     for (auto i = 0; i < m_shortData.size(); i++)
         m_shortData[i] = dist(m_randomGenerator);
     updateDisplayView();
@@ -231,6 +231,7 @@ void AlgoDisplayState::setAlgorithm(bool time)
             m_commands = Algo::MergeSort(m_shortData, time);
             break;
         case SortAlgoEnum::RadixSort:
+            m_commands = Algo::RadixSort(m_shortData, time);
             break;
     }
 }
