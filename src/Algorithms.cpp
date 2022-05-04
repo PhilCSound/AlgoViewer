@@ -133,12 +133,13 @@ namespace Algo
                 for (auto& shorts : b)
                     data.push_back(shorts);
             if (commands)
-                q.push_back(new SetGroupCommand(0, data.size()-1, data));
+                q.push_back(new SetGroupCommand(0, data.size()-1, data, "Radix digit index: " + std::to_string(digitIndex)));
             pow10 *= 10;
             for (auto& b : buckets)
                 b.clear();
          }
         return q;
     }
+
 
 }
