@@ -1,10 +1,15 @@
 #pragma once
 #include "LookCommand.hpp"
 #include "SwapCommand.hpp"
+#include "SetGroupCommand.hpp"
 #include <algorithm>
-#include <queue>
+#include <deque>
+#include <cmath>
 
-namespace Algo
+namespace Algo 
 {
-    std::queue<Command*> SelectionSort(std::vector<short> data);
+    std::deque<Command*> SelectionSort(std::vector<short> data, bool commands = true);
+    std::deque<Command*> InsertionSort(std::vector<short> data, bool commands = true);
+    std::deque<Command*> MergeSort(std::vector<short> data, bool commands = true);
+    std::deque<Command*> RadixSort(std::vector<short> data, bool commands = true);
 }

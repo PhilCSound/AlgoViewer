@@ -6,7 +6,6 @@ Application::Application()
 	m_window.setFramerateLimit(60);
 	m_window.setVerticalSyncEnabled(false);
 	m_isRunning = m_window.isOpen();
-	m_gui.setTarget(m_window);
 }
 
 
@@ -31,14 +30,13 @@ void Application::Update()
 	    m_stackOfStates.back()->Draw(m_window);
 	}
 	///Other draw functions here.
-	m_gui.draw();
 	m_window.display();
 }
 
 void Application::ChangeState(State * _state)
 {
 	if (!m_stackOfStates.empty()) {
-		m_stackOfStates.back()->OnExit();
+		m_stackOfStates.back()->OnExit(this);
 		m_stackOfStates.pop_back();
 	}
 	_state->OnEntry(this);
@@ -70,7 +68,6 @@ void Application::HandleInput()
 	sf::Event event;
 	while (m_window.pollEvent(event))
 	{
-		m_gui.handleEvent(event);
 		switch (event.type)
 		{
 			case sf::Event::Closed:

@@ -4,10 +4,10 @@
 class LookCommand : public Command
 {
 public:
-    LookCommand(int index, bool isIndexI = true) 
-        { m_index = index; m_isIndexI = isIndexI; }
+    LookCommand(int index, bool isIndexI = true, std::string log = "") 
+        { m_index = index; m_isIndexI = isIndexI; m_log = log; }
     
-    void execute(DataDeck& data) override
+    void execute(AlgoVisualizer& data) override
     {
         data.lookAtIndex(m_index, m_isIndexI);
     }

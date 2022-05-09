@@ -1,8 +1,13 @@
 #pragma once
-#include "DataDeck.hpp"
+#include "AlgoVisualizer.hpp"
+#include <string>
 
+//TODO CLEAN UP LOG LOGIC
 class Command
 {
 public:
-    virtual void execute(DataDeck& data) = 0;
+    virtual void execute(AlgoVisualizer& data) = 0;
+    std::string& toString() { return m_log; }
+protected:
+    std::string m_log;
 };

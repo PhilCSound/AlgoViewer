@@ -1,0 +1,268 @@
+Renderer.1 {
+    BackgroundColor = #F5F5F5;
+    BackgroundColorDisabled = #E6E6E6;
+    BackgroundColorDown = #EBEBEB;
+    BackgroundColorHover = white;
+    BorderColor = #3C3C3C;
+    BorderColorDisabled = #7D7D7D;
+    BorderColorDown = black;
+    BorderColorFocused = #1E1EB4;
+    BorderColorHover = black;
+    Borders = (1, 1, 1, 1);
+    TextColor = #3C3C3C;
+    TextColorDisabled = #7D7D7D;
+    TextColorDown = black;
+    TextColorHover = black;
+    Texture = None;
+    TextureDisabled = None;
+    TextureDown = None;
+    TextureDownFocused = None;
+    TextureDownHover = None;
+    TextureFocused = None;
+    TextureHover = None;
+}
+
+Renderer.2 {
+    BackgroundColor = transparent;
+    BorderColor = #3C3C3C;
+    Borders = (0, 0, 0, 0);
+    TextColor = #3C3C3C;
+    TextureBackground = None;
+}
+
+Renderer.3 {
+    BackgroundColor = white;
+    BorderColor = black;
+    TextureBackground = None;
+}
+
+Panel.BeginPanel {
+    Position = (25%, 37.5%);
+    Renderer = &3;
+    Size = (50%, 25%);
+
+    Button.Shuffle {
+        Position = (5%, 35%);
+        Renderer = &1;
+        Size = (40%, 10%);
+        Text = "Shuffle Data";
+        TextSize = 13;
+    }
+
+    ComboBox.Sort {
+        ChangeItemOnScroll = false;
+        ItemsToDisplay = 0;
+        MaximumItems = 0;
+        Position = (5%, 5%);
+        Size = (90%, 10%);
+        TextSize = 13;
+
+        Renderer {
+            ArrowBackgroundColor = #F5F5F5;
+            ArrowBackgroundColorHover = white;
+            ArrowColor = #3C3C3C;
+            ArrowColorHover = black;
+            BackgroundColor = #F5F5F5;
+            BorderColor = black;
+            Borders = (1, 1, 1, 1);
+            Padding = (0, 0, 0, 0);
+            TextColor = #3C3C3C;
+            TextureArrow = None;
+            TextureArrowDisabled = None;
+            TextureArrowHover = None;
+            TextureBackground = None;
+            TextureBackgroundDisabled = None;
+
+            ListBox {
+                BackgroundColor = #F5F5F5;
+                BackgroundColorHover = white;
+                BorderColor = black;
+                Borders = (1, 1, 1, 1);
+                Padding = (0, 0, 0, 0);
+                SelectedBackgroundColor = #006EFF;
+                SelectedBackgroundColorHover = #1E96FF;
+                SelectedTextColor = white;
+                TextColor = #3C3C3C;
+                TextColorHover = black;
+                TextureBackground = None;
+
+                Scrollbar {
+                    ArrowBackgroundColor = #F5F5F5;
+                    ArrowBackgroundColorHover = white;
+                    ArrowColor = #3C3C3C;
+                    ArrowColorHover = black;
+                    TextureArrowDown = None;
+                    TextureArrowDownHover = None;
+                    TextureArrowUp = None;
+                    TextureArrowUpHover = None;
+                    TextureThumb = None;
+                    TextureThumbHover = None;
+                    TextureTrack = None;
+                    TextureTrackHover = None;
+                    ThumbColor = #DCDCDC;
+                    ThumbColorHover = #E6E6E6;
+                    TrackColor = #F5F5F5;
+                }
+            }
+        }
+    }
+
+    Button.Begin {
+        Position = (5%, 50%);
+        Renderer = &1;
+        Size = (90%, 15%);
+        Text = Begin;
+        TextSize = 13;
+    }
+
+    Button.GenLinearData {
+        Position = (5%, 20%);
+        Renderer = &1;
+        Size = (40%, 10%);
+        Text = "Make Linear Data";
+        TextSize = 13;
+    }
+
+    Button.GenRandomData {
+        Position = (55%, 20%);
+        Renderer = &1;
+        Size = (40%, 10%);
+        Text = "Make Random Data";
+        TextSize = 13;
+    }
+
+    Button.Replay {
+        Position = (55%, 35%);
+        Renderer = &1;
+        Size = (40%, 10%);
+        Text = Replay;
+        TextSize = 13;
+    }
+
+    Slider.SizeSlider {
+        ChangeValueOnScroll = true;
+        InvertedDirection = false;
+        Maximum = 100;
+        Minimum = 3;
+        Position = (5%, 85%);
+        Size = (90%, 10%);
+        Step = 1;
+        Value = 50;
+
+        Renderer {
+            BorderColor = #3C3C3C;
+            BorderColorHover = black;
+            Borders = (1, 1, 1, 1);
+            TextureThumb = None;
+            TextureThumbHover = None;
+            TextureTrack = None;
+            TextureTrackHover = None;
+            ThumbColor = #F5F5F5;
+            ThumbColorHover = white;
+            TrackColor = #F5F5F5;
+            TrackColorHover = white;
+        }
+    }
+
+    Label.Num {
+        AutoSize = true;
+        IgnoreMouseEvents = true;
+        Position = (20%, 70%);
+        Renderer = &2;
+        Size = (19.2, 18);
+        Text = 10;
+        TextSize = 13;
+    }
+
+    Label.SizeLabel {
+        IgnoreMouseEvents = true;
+        MaximumTextWidth = 10;
+        Position = (5%, 70%);
+        Renderer = &2;
+        Size = (37.2, 18);
+        Text = "Size:";
+        TextSize = 13;
+    }
+}
+
+Panel.DIsplayPanel {
+    Renderer = &3;
+    Size = (100%, 20%);
+
+    ChatBox.Log {
+        LinesStartFromTop = true;
+        NewLinesBelowOthers = true;
+        Position = (2%, 5%);
+        Size = (63%, 90%);
+        TextColor = black;
+        TextSize = 13;
+
+        Renderer {
+            BackgroundColor = #F5F5F5;
+            BorderColor = black;
+            Borders = (1, 1, 1, 1);
+            Padding = (0, 0, 0, 0);
+            TextureBackground = None;
+        }
+    }
+
+    ProgressBar.Progress {
+        Maximum = 100;
+        Minimum = 0;
+        Position = (70%, 75%);
+        Size = (25%, 20%);
+        Text = "Progress %";
+        TextSize = 13;
+        Value = 0;
+
+        Renderer {
+            BackgroundColor = #F5F5F5;
+            BorderColor = black;
+            Borders = (1, 1, 1, 1);
+            FillColor = #006EFF;
+            TextColor = #3C3C3C;
+            TextColorFilled = white;
+            TextureBackground = None;
+            TextureFill = None;
+        }
+    }
+
+    Button.ReturnToMenu {
+        Position = (70%, 5%);
+        Renderer = &1;
+        Size = (25%, 25%);
+        Text = "Return To Main Menu";
+        TextSize = 13;
+    }
+
+    Button.StopButton {
+        Position = (70%, 40%);
+        Size = (25%, 25%);
+        Text = "Stop Algorithm";
+        TextSize = 13;
+
+        Renderer {
+            BackgroundColor = #F5F5F5;
+            BackgroundColorDisabled = #E6E6E6;
+            BackgroundColorDown = #EBEBEB;
+            BackgroundColorHover = white;
+            BorderColor = #3C3C3C;
+            BorderColorDisabled = #7D7D7D;
+            BorderColorDown = black;
+            BorderColorFocused = #1E1EB4;
+            BorderColorHover = black;
+            Borders = (1, 1, 1, 1);
+            TextColor = #3C3C3C;
+            TextColorDisabled = #7D7D7D;
+            TextColorDown = black;
+            TextColorHover = black;
+            Texture = None;
+            TextureDisabled = None;
+            TextureDown = None;
+            TextureDownFocused = None;
+            TextureDownHover = None;
+            TextureFocused = None;
+            TextureHover = None;
+        }
+    }
+}

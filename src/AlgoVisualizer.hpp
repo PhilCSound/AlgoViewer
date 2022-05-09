@@ -1,29 +1,30 @@
 #pragma once
 #include <vector>
 #include <algorithm>
-#include <random>
-#include <chrono>
 #include "SFML/Graphics.hpp"
 #include "EnumAnimationState.hpp"
 
-class DataDeck : public sf::Drawable
+class AlgoVisualizer : public sf::Drawable
 {
 public:
-    DataDeck();
-    std::vector<short> getCopyOfData();
-    void generateData();
-    void shuffleData();
+    AlgoVisualizer();
+    void setData(std::vector<short> data);
+    sf::View getView();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void lookAtIndex(int index, bool indexI = true);
     void swap(int indexL, int indexR);
+    void lookSetGroup(int indexL, int indexR, std::vector<short> data);
+    void setGroup();
     const bool isAnimating() const;
     void update(sf::Time dt);
+    void resetIndexes();
 
 private:
-    const unsigned int MAX_NUM_DATA = 100;
     const float PIX_SIZE = 8.0f;
     const float LOOK_ANIM_IN_MS = 3.0f;
-    const float SWAP_ANIM_IN_MS = 6.0f;
+    const float BASE_SWAP_ANIM_IN_MS = 0.0f;
+    const float DIFFERENCE_SWAP = 10.0f;
+    float SWAP_TIME_ADD = 0.0f;
     const sf::Color DEF_COLOR_1 = sf::Color(102, 126, 234);
     const sf::Color DEF_COLOR_2 = sf::Color(118, 75, 162);
     const sf::Color INDEX_I_COLOR_1 = sf::Color(19, 84, 122);
@@ -32,12 +33,12 @@ private:
     const sf::Color INDEX_J_COLOR_2 = sf::Color(255, 154, 158);
     sf::VertexArray m_vertexArray;
     std::vector<short> m_shortData;
-    std::mt19937 m_randomGenerator;
-    std::random_device m_randomDevice;
+    std::vector<short> m_copydata;
     int m_indexI = 0;
     int m_indexJ = 0;
     int m_indexToSwapL = 0;
     int m_indexToSwapR = 0;
+    sf::Vector2f m_pixMax;
     sf::Time m_elapsedTime;
     EnumAnimationState m_animState = EnumAnimationState::NOT_ANIM;
 
